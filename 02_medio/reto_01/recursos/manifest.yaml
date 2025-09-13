@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-prod
+  namespace: production
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: api-prod
+  template:
+    metadata:
+      labels:
+        app: api-prod
+    spec:
+      containers:
+      - name: api-prod
+        image: nginx:latest
+        ports:
+        - containerPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: busybox-test
+  namespace: production
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: busybox-test
+  template:
+    metadata:
+      labels:
+        app: busybox-test
+    spec:
+      containers:
+      - name: busybox-test
+        image: busybox
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-prod-service
+  namespace: production
+spec:
+  selector:
+    app: api-prod
+  ports:
+    - protocol: TCP
+      port: 8090
+      targetPort: 8080
+  type: ClusterIP
