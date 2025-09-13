@@ -21,10 +21,6 @@ En este reto aprenderás a desplegar una aplicación web sencilla en un clúster
 2. Expón el Deployment mediante un Service de tipo `NodePort` llamado `web-app`.
 3. Asegúrate de que la aplicación sea accesible desde tu máquina local.
 
-## Recursos
-
-- Puedes usar la documentación oficial de Kubernetes: https://kubernetes.io/es/docs/
-
 ## Criterios de Éxito
 
 - El Deployment `web-app` debe tener 2 pods en estado Running.
