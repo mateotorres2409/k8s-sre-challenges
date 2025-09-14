@@ -36,7 +36,7 @@ spec:
     spec:
       containers:
       - name: busybox-test
-        image: busybox
+        image: busybox:latest
 ---
 apiVersion: v1
 kind: Service
