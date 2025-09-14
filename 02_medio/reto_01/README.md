@@ -1,4 +1,4 @@
-# Reto de Diagnóstico: Despliegue con Incidente Simulado
+# Escenario: Microservicio de UUIDs con Falla
 
 ## Descripción
 
