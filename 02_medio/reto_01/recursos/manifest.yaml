@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: api-prod
-        image: nginx:latest
+        image: mateotorres2409/nodejs-uuid:latest
         ports:
         - containerPort: 8080
 ---
