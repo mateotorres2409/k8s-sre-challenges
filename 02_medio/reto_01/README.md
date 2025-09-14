@@ -2,41 +2,50 @@
 
 ## Descripción
 
-En este reto deberás desplegar una aplicación con una falla intencional en un clúster de Kubernetes. El objetivo es que la persona participante diagnostique y solucione el problema para restaurar el servicio.
+Imagina que un desarrollador despliega un microservicio encargado de generar UUIDs, el cual es fundamental para la integración con un servicio crítico de la empresa. Todo parece estar bien: los pods del microservicio aparecen en estado **Running** y no muestran errores evidentes en Kubernetes.
 
-## Objetivos de Aprendizaje
+Sin embargo, el equipo de desarrollo reporta que el endpoint `/uuid` no responde y la integración con el servicio crítico está fallando. Tras varios intentos de solución sin éxito, el incidente es escalado al equipo de SRE.
 
-- Diagnóstico de problemas en Kubernetes.
-- Uso de herramientas (`kubectl`, logs, describe, etc.) para investigación.
-- Aplicación de soluciones y buenas prácticas.
+## Tu reto como SRE
+
+1. **Diagnosticar la causa raíz:** Aunque los pods están en estado Running, el servicio no funciona correctamente. Debes investigar por qué el endpoint `/uuid` no responde y por qué la aplicación no es accesible desde el Service.
+2. **Documentar los pasos y comandos utilizados:** Registra cada comando y observación relevante durante tu diagnóstico.
+3. **Proponer y aplicar una solución:** Una vez identificada la causa, realiza los cambios necesarios para restaurar el servicio.
+4. **Explicar cómo evitar este tipo de problemas en el futuro:** Sugiere buenas prácticas y mecanismos de monitoreo o alertas para detectar este tipo de fallas antes de que impacten al negocio.
+
 
 ## Requisitos Previos
 
 - Acceso a un clúster de Kubernetes.
-- `kubectl` instalado.
-- Crea namespace `production`
-- Aplica los recursos `recursos/manifest.yaml` en el namespace `production`
-
-## Enunciado
-
-1. El equipo reporta que el endpoint /health no responde y la aplicación no es accesible desde el Service.
-2. Tu tarea es:
-    - Diagnosticar la causa raíz del problema.
-    - Documentar los pasos y comandos utilizados.
-    - Proponer y aplicar una solución para restaurar el servicio.
-    - Explicar cómo evitar este tipo de problemas en el futuro.
-
-## Criterios de Éxito
-- Desplegar correctamente el manifiesto.
-- Identificar correctamente la causa raíz.
-- Documentas los pasos y comandos usados en el diagnóstico.
-- Propones y aplicas una solución efectiva.
-- Explicas medidas preventivas para el futuro.
+    - Cluster local (KIND - Minikube - k3d)
+    - `kubectl` instalado.
+    - https://labs.play-with-k8s.com
+```sh
+# Crear nueva instancia
+    # node1
+    # node2
+# node1 - indicaciones de consola
+1. Initializes cluster master node:
+2. Initialize cluster networking:
+# node1
+#3. 
+kubeadm token create --print-join-command
+# node2
+4. Registrar el output del paso 3
+# node1
+# 5.
+kubectl label node node2 node-role.kubernetes.io/worker=worker
+kubectl get nodes 
+```
+- Preparar entorno
+```sh
+kubectl create ns production
+kubectl apply -f https://raw.githubusercontent.com/mateotorres2409/k8s-sre-challenges/refs/heads/main/02_medio/reto_01/recursos/manifest.yaml -n production
+```
 
 ## Cómo Probar
-1. Ingresa al contenedor desplegado en el pod del deployment con `busybox-test`
-2. Realizar un comando curl al servicio `api-prod-service` por el puerto `8090` a la URL `/health`
+1. Inovacar el servicio **api-uuid-service** por el puerto **8090** a la url **/uuid** expuesto por el microservicio **api-uuid**
 
 ---
 
-**¡Buena suerte! Este reto simula un incidente real de SRE en Kubernetes.**
+**¡Buena suerte!**

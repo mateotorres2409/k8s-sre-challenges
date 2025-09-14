@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: api-prod
+  name: api-uuid
   namespace: production
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: api-prod
+      app: api-uuid
   template:
     metadata:
       labels:
-        app: api-prod
+        app: api-uuid
     spec:
       containers:
-      - name: api-prod
+      - name: api-uuid
         image: mateotorres2409/nodejs-uuid:latest
         ports:
         - containerPort: 8080
@@ -22,7 +22,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: api-prod-service
+  name: api-uuid-service
   namespace: production
 spec:
   selector:
